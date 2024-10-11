@@ -1,0 +1,39 @@
+#!/bin/sh
+
+TEMP_NAME=.batch_rename
+
+# list files in the current directory
+ls -1p $@ > $TEMP_NAME
+cp $TEMP_NAME $TEMP_NAME.bak
+
+# create dir avoid overwriting an original file while renaming another
+mkdir $TEMP_NAME.dir
+
+# edit name list in vim
+vim $TEMP_NAME
+
+{
+    # read both files simultaneously
+    exec 3< $TEMP_NAME.bak
+    exec 4< $TEMP_NAME
+    
+    while IFS= read -r line1 <&3 && IFS= read -r line2 <&4; do
+        # compare lines and rename
+        if [ "$line1" != "$line2" ]; then
+			echo "$line1 -> $line2"
+			mv "$line1" $TEMP_NAME.dir/"$line2"
+        fi
+    done
+
+	# move renamed files back to the current directory
+	mv $TEMP_NAME.dir/* .
+
+    # close file descriptors
+    exec 3<&-
+    exec 4<&-
+}
+
+
+# remove temp files
+rm -rf $TEMP_NAME $TEMP_NAME.bak $TEMP_NAME.dir
+
