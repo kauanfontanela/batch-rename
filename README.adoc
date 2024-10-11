@@ -4,6 +4,8 @@ Rename multiple files at once in a file editor. That way you can use editor tool
 
 -- _Inspired by JannisX11's vscode extension https://github.com/JannisX11/batch-rename[batch-rename]._
 
+image::demo.gif[batch-rename demo]
+
 == requirements
 * `vim` - _for now_
 
