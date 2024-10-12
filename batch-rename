@@ -3,7 +3,7 @@
 TEMP_NAME=.batch_rename
 
 # list files in the current directory
-ls -1p $@ > $TEMP_NAME
+ls -1p "$@" > $TEMP_NAME
 cp $TEMP_NAME $TEMP_NAME.bak
 
 # create dir avoid overwriting an original file while renaming another
