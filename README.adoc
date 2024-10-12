@@ -6,9 +6,6 @@ Rename multiple files at once in a file editor. That way you can use editor tool
 
 image::demo.gif[batch-rename demo]
 
-== requirements
-* `vim` - _for now_
-
 == usage
 [,sh]
 ----
@@ -16,21 +13,20 @@ batch-rename [REGEX]
 
 # Examples
 $ batch-rename *.txt
-$ batch-rename file[0-9]*.*
+$ EDITOR=nvim batch-rename file[0-9]*.*
 ----
 
 == :warning: known bugs/limitations
-- wont work if you are not in the renamed files directory, 
+- wont work if you are not in the renamed files directory,
 or if you try to rename files from multiple directories
 
 == planned implementations/modifications
 
 Feel free to contribue your own ideas in the https://github.com/kauanfontanela/batch-rename/issues[issues] page
 
-* [ ] custom editor (nano, vi, nvim etc...)
+* [x] custom editor (tested for `vi`, `vim`, `nvim` and `nano`)
 * [ ] validate editor output before renaming
 * [ ] directory arg
 * [ ] validate args
 * [ ] silent version
 * [ ] help command
-

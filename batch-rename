@@ -10,13 +10,13 @@ cp $TEMP_NAME $TEMP_NAME.bak
 mkdir $TEMP_NAME.dir
 
 # edit name list in vim
-vim $TEMP_NAME
+${EDITOR:-vi} "$TEMP_NAME"
 
 {
     # read both files simultaneously
     exec 3< $TEMP_NAME.bak
     exec 4< $TEMP_NAME
-    
+
     while IFS= read -r line1 <&3 && IFS= read -r line2 <&4; do
         # compare lines and rename
         if [ "$line1" != "$line2" ]; then
@@ -36,4 +36,3 @@ vim $TEMP_NAME
 
 # remove temp files
 rm -rf $TEMP_NAME $TEMP_NAME.bak $TEMP_NAME.dir
-
